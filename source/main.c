@@ -4,7 +4,11 @@
 
 #include "ps4.h"
 
-uint8_t THRESHOLDTEMP = 60;
+#ifndef FAN_THRESHOLD
+#define FAN_THRESHOLD 45
+#endif
+
+uint8_t THRESHOLDTEMP = FAN_THRESHOLD;
 
 int _main(struct thread *td) {
   UNUSED(td);

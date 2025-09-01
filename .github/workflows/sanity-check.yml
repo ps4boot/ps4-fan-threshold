@@ -1,4 +1,3 @@
----
 name: "Sanity Check"
 
 on:
@@ -14,29 +13,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: "Checkout"
+      - name: "Checkout"
         uses: actions/checkout@v2
-      -
-        name: "Setup Environment"
+
+      - name: "Setup Environment"
         run: |
           git clone https://github.com/Scene-Collective/ps4-payload-sdk ~/ps4-payload-sdk && cd "$_"
           chmod +x install.sh
           sudo ./install.sh
-      -
-        name: "Build Payload"
+
+      - name: "Build Payload"
         run: |
-          export PS4SDK=/opt/ps4sdk
+          export PS4SDK=/lib/ps4-payload-sdk
           make
-      -
-        name: "Upload Binary Artifact"
-        uses: actions/upload-artifact@v2
+
+      - name: "Upload Binary Artifact"
+        uses: actions/upload-artifact@v4
         with:
           path: ./*.bin
-          if-no-files-found: error
-      -
-        name: "Upload Map Artifact"
-        uses: actions/upload-artifact@v2
-        with:
-          path: ./*.map
           if-no-files-found: error
